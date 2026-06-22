@@ -16,6 +16,7 @@ export type Boat = {
   country: string;
   category: string;
   fuel_type: string | null;
+  seller_type?: string | null;
   engine_summary: string | null;
   engine_hours: number | null;
   description: string;
