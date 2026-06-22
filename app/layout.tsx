@@ -4,10 +4,11 @@ import './globals.css';
 import Link from 'next/link';
 import { createClient, hasSupabaseConfig } from '@/lib/supabase-server';
 import { signOut } from './actions';
+import { BoatshedLogo } from '@/components/MarineIcons';
 
 export const metadata: Metadata = {
   title: 'Boatshed Marketplace',
-  description: 'A responsive boat marketplace platform for private sellers, brokers and buyers.'
+  description: 'A premium marine marketplace for boats, chandlery, services, berths and brokers.'
 };
 
 async function Nav() {
@@ -21,35 +22,34 @@ async function Nav() {
       user = null;
     }
   }
+
   return (
-    <nav className="navbar navbar-expand-lg bg-white shadow-sm sticky-top">
-      <div className="container py-2">
-        <Link className="navbar-brand fw-bold text-primary fs-4" href="/">Boatshed<span className="text-dark">Market</span></Link>
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon" />
-        </button>
-        <div className="collapse navbar-collapse" id="nav">
-          <ul className="navbar-nav ms-auto align-items-lg-center gap-lg-2">
-            <li className="nav-item"><Link className="nav-link" href="/boats">Boats</Link></li>
-            <li className="nav-item"><Link className="nav-link" href="/chandlery">Chandlery</Link></li>
-            <li className="nav-item"><Link className="nav-link" href="/services">Services</Link></li>
-            <li className="nav-item"><Link className="nav-link" href="/marinas">Marinas</Link></li>
-            <li className="nav-item"><Link className="nav-link" href="/sell">Sell</Link></li>
-            <li className="nav-item"><Link className="nav-link" href="/pricing">Pricing</Link></li>
-            {user ? (
-              <>
-                <li className="nav-item"><Link className="nav-link" href="/dashboard">Dashboard</Link></li>
-                <li className="nav-item">
-                  <form action={signOut}><button className="btn btn-outline-secondary btn-sm">Sign out</button></form>
-                </li>
-              </>
-            ) : (
-              <li className="nav-item"><Link className="btn btn-primary btn-sm px-3" href="/auth">Login / register</Link></li>
-            )}
-          </ul>
+    <header className="site-header">
+      <div className="nav-wrap container-fluid">
+        <Link className="brand-link" href="/" aria-label="Boatshed Marketplace home">
+          <BoatshedLogo />
+        </Link>
+        <nav className="main-nav" aria-label="Main navigation">
+          <Link href="/boats">Boats</Link>
+          <Link href="/chandlery">Chandlery</Link>
+          <Link href="/services">Services</Link>
+          <Link href="/marinas">Marinas</Link>
+          <Link href="/sell">Sell</Link>
+          <Link href="/pricing">Brokers</Link>
+        </nav>
+        <div className="nav-actions">
+          {user ? (
+            <>
+              <Link className="ghost-link" href="/dashboard">Dashboard</Link>
+              <form action={signOut}><button className="nav-button ghost-button">Sign out</button></form>
+            </>
+          ) : (
+            <Link className="ghost-link" href="/auth">Sign in</Link>
+          )}
+          <Link className="nav-button hot-button" href="/sell">List your boat</Link>
         </div>
       </div>
-    </nav>
+    </header>
   );
 }
 
@@ -59,14 +59,42 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <Nav />
         {children}
-        <footer className="footer mt-5 py-5">
-          <div className="container d-flex flex-column flex-md-row justify-content-between gap-3">
-            <div>
-              <h5 className="text-white">BoatshedMarket</h5>
-              <p className="mb-0">A modern marketplace foundation for boats, brokers and serious buyers.</p>
+        <footer className="site-footer">
+          <div className="footer-glow" />
+          <div className="container footer-grid">
+            <div className="footer-brand">
+              <BoatshedLogo />
+              <p>Your global marketplace for boats, chandlery, trusted marine services and berths.</p>
+              <div className="social-dots" aria-label="Social links"><span /> <span /> <span /> <span /></div>
             </div>
-            <div className="small">Boats • Chandlery • Services • Marinas • Brokers • Payments-ready</div>
+            <div>
+              <h6>Marketplace</h6>
+              <Link href="/boats">Boats</Link>
+              <Link href="/chandlery">Chandlery</Link>
+              <Link href="/services">Services</Link>
+              <Link href="/marinas">Marinas</Link>
+            </div>
+            <div>
+              <h6>Sell</h6>
+              <Link href="/sell">Sell your boat</Link>
+              <Link href="/pricing">Broker plans</Link>
+              <Link href="/dashboard">Dashboard</Link>
+              <Link href="/admin">Admin</Link>
+            </div>
+            <div>
+              <h6>Support</h6>
+              <a href="#">Help centre</a>
+              <a href="#">Safety</a>
+              <a href="#">Terms</a>
+              <a href="#">Privacy</a>
+            </div>
+            <div className="newsletter-card">
+              <h6>Stay in the loop</h6>
+              <p>New listings, refit services, berth offers and marine deals.</p>
+              <form className="newsletter-form"><input placeholder="Email address" /><button>Join</button></form>
+            </div>
           </div>
+          <div className="container footer-bottom">© 2026 Boatshed Marketplace. Built for a modern marine marketplace.</div>
         </footer>
       </body>
     </html>

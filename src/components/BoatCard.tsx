@@ -4,21 +4,25 @@ import { currencyGBP } from '@/lib/format';
 
 export function BoatCard({ boat }: { boat: Boat }) {
   return (
-    <div className="card boat-card h-100 border-0 shadow-sm">
-      <img src={boat.main_image_url || 'https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?auto=format&fit=crop&w=900&q=80'} className="card-img-top" alt={boat.title} />
-      <div className="card-body d-flex flex-column">
-        <div className="d-flex justify-content-between align-items-start gap-2">
-          <h5 className="card-title mb-1">{boat.title}</h5>
-          {boat.featured && <span className="badge text-bg-warning">Featured</span>}
+    <article className="listing-card">
+      <Link href={`/boats/${boat.id}`} className="listing-media" aria-label={`View ${boat.title}`}>
+        <img src={boat.main_image_url || 'https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?auto=format&fit=crop&w=900&q=80'} alt={boat.title} />
+        {boat.featured && <span className="listing-flag">Featured</span>}
+        <span className="heart-dot">♡</span>
+      </Link>
+      <div className="listing-body">
+        <div className="listing-title-row">
+          <h3>{boat.title}</h3>
+          <strong>{currencyGBP(boat.price_gbp)}</strong>
         </div>
-        <p className="text-muted small mb-2">{boat.location} • {boat.year || 'Year TBC'} • {boat.length_ft || '?'} ft</p>
-        <p className="fs-5 fw-bold text-primary mb-3">{currencyGBP(boat.price_gbp)}</p>
-        <div className="d-flex flex-wrap gap-2 mb-3 small">
-          <span className="badge badge-soft">{boat.category}</span>
-          {boat.fuel_type && <span className="badge badge-soft">{boat.fuel_type}</span>}
+        <p>{boat.location} · {boat.year || 'Year TBC'} · {boat.length_ft || '?'} ft</p>
+        <div className="spec-row">
+          <span>{boat.category}</span>
+          {boat.fuel_type && <span>{boat.fuel_type}</span>}
+          <span>{boat.seller_type || 'Broker'}</span>
         </div>
-        <Link href={`/boats/${boat.id}`} className="btn btn-outline-primary mt-auto">View listing</Link>
+        <Link href={`/boats/${boat.id}`} className="card-link-arrow">View listing →</Link>
       </div>
-    </div>
+    </article>
   );
 }
