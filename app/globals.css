@@ -1,0 +1,41 @@
+:root {
+  --brand-navy: #081b33;
+  --brand-blue: #0d6efd;
+  --brand-gold: #d6a847;
+  --soft-bg: #f5f8fc;
+}
+
+html, body { min-height: 100%; }
+body { background: var(--soft-bg); }
+.navbar-brand { letter-spacing: -0.03em; }
+.hero {
+  background: linear-gradient(135deg, rgba(8,27,51,.96), rgba(13,110,253,.82)), url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  border-radius: 0 0 2rem 2rem;
+}
+.search-panel { margin-top: -2rem; position: relative; z-index: 5; }
+.boat-card { transition: transform .18s ease, box-shadow .18s ease; overflow: hidden; }
+.boat-card:hover { transform: translateY(-3px); box-shadow: 0 1rem 2rem rgba(8,27,51,.12); }
+.boat-card img { aspect-ratio: 16/10; object-fit: cover; }
+.badge-soft { background: rgba(13,110,253,.12); color: #084298; }
+.feature-icon { width: 3rem; height: 3rem; display: grid; place-items: center; border-radius: 1rem; background: #e8f1ff; color: var(--brand-blue); }
+.form-shell { max-width: 960px; }
+.footer { background: var(--brand-navy); color: rgba(255,255,255,.76); }
+.footer a { color: white; text-decoration: none; }
+.dashboard-stat { border-left: .35rem solid var(--brand-blue); }
+.admin-row { border-left: .35rem solid var(--brand-gold); }
+
+@media (max-width: 767px) {
+  .hero { border-radius: 0 0 1rem 1rem; }
+  .display-4 { font-size: 2.2rem; }
+  .search-panel { margin-top: -1rem; }
+}
+.marketplace-card { transition: transform .18s ease, box-shadow .18s ease; overflow: hidden; }
+.marketplace-card:hover { transform: translateY(-3px); box-shadow: 0 1rem 2rem rgba(8,27,51,.12); }
+.marketplace-card img { aspect-ratio: 16/10; object-fit: cover; }
+.market-snapshot strong { display: block; line-height: 1; }
+.market-snapshot span { display: block; font-size: .85rem; opacity: .75; }
+.section-tile { background: linear-gradient(180deg, #ffffff, #eef5ff); border: 1px solid rgba(13,110,253,.08); box-shadow: 0 .75rem 2rem rgba(8,27,51,.08); }
+.listing-hero-img { max-height: 520px; object-fit: cover; }
