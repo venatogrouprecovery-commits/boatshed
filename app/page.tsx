@@ -5,25 +5,20 @@ import { ProductCard, ServiceCard } from '@/components/MarketplaceCards';
 import { SearchForm } from '@/components/SearchForm';
 import { Boat } from '@/types/database';
 import { chandleryProducts, demoBoats, marinaListings, marineServices } from '@/lib/demo-data';
-import { MarineIcon, YachtHeroArt } from '@/components/MarineIcons';
+import { MarineIcon } from '@/components/MarineIcons';
 
-const categories = [
-  { title: 'Boats', text: 'Sail, power, classic and liveaboard listings.', href: '/boats', icon: 'boat' as const },
-  { title: 'Chandlery', text: 'Parts, electronics, safety kit and refit gear.', href: '/chandlery', icon: 'chandlery' as const },
-  { title: 'Services', text: 'Engineers, upholstery, surveys and transport.', href: '/services', icon: 'services' as const },
-  { title: 'Marinas', text: 'Berths, yards, lift-outs and winter storage.', href: '/marinas', icon: 'marina' as const }
+const heroImage = 'https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?auto=format&fit=crop&w=1800&q=85';
+
+const focusAreas = [
+  { title: 'Brokerage', text: 'Qualified boat adverts with rich photography, specs and broker lead capture.', href: '/boats', icon: 'boat' as const },
+  { title: 'Chandlery', text: 'Useful marine gear, refit parts, electronics and safety equipment.', href: '/chandlery', icon: 'chandlery' as const },
+  { title: 'Services', text: 'Engineers, surveyors, upholstery, transport and refit specialists.', href: '/services', icon: 'services' as const },
+  { title: 'Berths', text: 'Marina offers, winter storage, lift-out yards and local facilities.', href: '/marinas', icon: 'marina' as const }
 ];
-
-const trust = [
-  ['12,000+', 'active listings', 'boat'],
-  ['1,200+', 'verified brokers', 'broker'],
-  ['24/7', 'enquiry capture', 'support'],
-  ['150+', 'countries covered', 'globe'],
-  ['Secure', 'seller controls', 'shield']
-] as const;
 
 export default async function Home() {
   let liveBoats: Boat[] | null = null;
+
   if (hasSupabaseConfig()) {
     try {
       const supabase = createClient();
@@ -41,103 +36,99 @@ export default async function Home() {
   }
 
   const boats = (liveBoats?.length ? liveBoats : demoBoats.slice(0, 6)) as Boat[];
+  const leadBoat = boats[0];
 
   return (
-    <main className="home-page">
-      <section className="premium-hero">
-        <div className="hero-orb hero-orb-one" />
-        <div className="hero-orb hero-orb-two" />
-        <div className="container hero-grid">
-          <div className="hero-copy">
-            <span className="eyebrow"><span /> The next generation Boatshed experience</span>
-            <h1>Buy, sell and explore the marine world.</h1>
-            <p>Boatshed Marketplace brings boats, chandlery, marine services and marina offers into one elegant platform for serious buyers, sellers and brokers.</p>
-            <div className="hero-actions">
-              <Link className="primary-cta" href="/boats">Browse boats</Link>
-              <Link className="secondary-cta" href="/sell">List your boat</Link>
+    <main className="bm-page">
+      <section className="bm-hero">
+        <div className="bm-hero-bg" style={{ backgroundImage: `url(${heroImage})` }} />
+        <div className="bm-hero-shade" />
+        <div className="container bm-hero-inner">
+          <div className="bm-hero-copy">
+            <span className="bm-kicker">Boatshed Marketplace</span>
+            <h1>The premium marine marketplace for serious buyers.</h1>
+            <p>Boats, brokers, chandlery, berths and trusted marine services — presented with the polish expected from a modern global marketplace.</p>
+            <div className="bm-hero-actions">
+              <Link className="bm-primary" href="/boats">Explore boats</Link>
+              <Link className="bm-secondary" href="/sell">Sell with Boatshed</Link>
             </div>
           </div>
-          <div className="hero-art-wrap">
-            <YachtHeroArt />
-            <div className="floating-card vessel-card">
-              <span className="mini-label">Featured</span>
-              <strong>Princess F45</strong>
-              <em>£649,000 · Miami</em>
-            </div>
-            <div className="floating-card broker-card">
-              <MarineIcon name="shield" />
-              <span>Verified broker network</span>
-            </div>
-          </div>
+
+          <aside className="bm-feature-panel" aria-label="Featured boat">
+            <span className="bm-panel-tag">Featured listing</span>
+            <h2>{leadBoat.title}</h2>
+            <p>{leadBoat.location} · {leadBoat.year} · {leadBoat.length_ft} ft</p>
+            <Link href={`/boats/${leadBoat.id}`}>View listing</Link>
+          </aside>
         </div>
       </section>
 
-      <div className="container search-anchor"><SearchForm /></div>
+      <div className="container bm-search-wrap">
+        <SearchForm />
+      </div>
 
-      <section className="container category-sweep">
-        {categories.map((item) => (
-          <Link href={item.href} className="category-pill" key={item.title}>
-            <span className="icon-bubble"><MarineIcon name={item.icon} /></span>
-            <strong>{item.title}</strong>
-            <small>{item.text}</small>
+      <section className="container bm-intro-strip" aria-label="Marketplace sections">
+        {focusAreas.map((item) => (
+          <Link className="bm-focus-link" href={item.href} key={item.title}>
+            <MarineIcon name={item.icon} />
+            <span>{item.title}</span>
+            <em>{item.text}</em>
           </Link>
         ))}
       </section>
 
-      <section className="container section-block">
-        <div className="section-heading">
+      <section className="container bm-section bm-fleet-section">
+        <div className="bm-section-head">
           <div>
-            <span className="section-kicker">Curated listings</span>
+            <span className="bm-kicker">Curated brokerage</span>
             <h2>Featured boats</h2>
-            <p>Polished listing cards with strong imagery, quick specs and clear broker-ready calls to action.</p>
           </div>
-          <Link href="/boats" className="text-arrow">View all boats →</Link>
+          <p>High-impact listing cards designed around photography, clear pricing and fast enquiry behaviour.</p>
+          <Link href="/boats">View all boats</Link>
         </div>
-        <div className="listing-grid">
+        <div className="bm-listing-grid">
           {boats.map((boat: Boat) => <BoatCard boat={boat} key={boat.id} />)}
         </div>
       </section>
 
-      <section className="service-ribbon">
-        <div className="container">
-          <div className="section-heading light-heading">
-            <div>
-              <span className="section-kicker">Trusted suppliers</span>
-              <h2>Everything around the boat, not just the boat.</h2>
-              <p>Services, products and berths make the marketplace useful even before a buyer is ready to purchase.</p>
-            </div>
-            <Link href="/services" className="text-arrow light">Explore services →</Link>
+      <section className="bm-editorial-band">
+        <div className="container bm-editorial-grid">
+          <div className="bm-editorial-copy">
+            <span className="bm-kicker">Beyond boat adverts</span>
+            <h2>Turn the marketplace into the marine industry's front door.</h2>
+            <p>The strongest platform is not just a classified board. It captures buyers earlier: when they are buying kit, booking engineers, comparing marinas or planning a refit.</p>
+            <Link className="bm-secondary bm-secondary-light" href="/services">Explore services</Link>
           </div>
-          <div className="service-grid">
+          <div className="bm-service-deck">
             {marineServices.slice(0, 4).map((service) => <ServiceCard service={service} key={service.id} />)}
           </div>
         </div>
       </section>
 
-      <section className="container split-market section-block">
-        <div className="market-panel chandlery-panel">
-          <div className="panel-heading">
-            <span className="section-kicker">Chandlery</span>
-            <h2>Premium gear and marine essentials.</h2>
+      <section className="container bm-market-grid">
+        <div className="bm-market-card bm-products-card">
+          <div className="bm-card-head">
+            <span className="bm-kicker">Chandlery</span>
+            <Link href="/chandlery">View products</Link>
           </div>
-          <div className="product-strip">
+          <h2>Marine gear that belongs beside the boat search.</h2>
+          <div className="bm-product-row">
             {chandleryProducts.slice(0, 3).map((product) => <ProductCard product={product} key={product.id} />)}
           </div>
         </div>
-        <div className="market-panel marina-panel">
-          <div className="panel-heading">
-            <span className="section-kicker">Marinas & berths</span>
-            <h2>Berth offers with a smarter visual map feel.</h2>
+
+        <div className="bm-market-card bm-marina-card">
+          <div className="bm-card-head">
+            <span className="bm-kicker">Marinas</span>
+            <Link href="/marinas">View berths</Link>
           </div>
-          <div className="mini-map" aria-hidden="true">
-            <span className="pin p1" /><span className="pin p2" /><span className="pin p3" />
-            <svg viewBox="0 0 420 210"><path d="M0 80c70-60 126-50 185-20 65 32 114 26 235-35v185H0Z" fill="#bcecff"/><path d="M0 146c71-13 123-7 156 18 48 36 112 34 264-23v69H0Z" fill="#0b6fae" opacity=".65"/><path d="M56 0h145L70 210H0V90Z" fill="#d9f2db"/><path d="M230 0h190v70c-80 32-145 34-207 8Z" fill="#e8f5dc"/><path d="M20 75h140M80 0v205M205 20l-70 170M260 20l110 130" stroke="#fff" strokeWidth="8" opacity=".9"/></svg>
-          </div>
-          <div className="berth-list">
+          <h2>Berths, yards and seasonal storage.</h2>
+          <div className="bm-marina-photo" style={{ backgroundImage: `url(${marinaListings[0].image_url})` }} />
+          <div className="bm-berth-list">
             {marinaListings.slice(0, 3).map((marina) => (
               <Link href="/marinas" key={marina.id}>
                 <strong>{marina.name}</strong>
-                <small>{marina.location}</small>
+                <span>{marina.location}</span>
                 <em>{marina.price_note}</em>
               </Link>
             ))}
@@ -145,26 +136,22 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="container trust-strip">
-        {trust.map(([value, label, icon]) => (
-          <div className="trust-item" key={label}>
-            <MarineIcon name={icon as any} />
-            <strong>{value}</strong>
-            <span>{label}</span>
-          </div>
-        ))}
+      <section className="container bm-proof-strip">
+        <div><strong>12,000+</strong><span>marketplace listings</span></div>
+        <div><strong>1,200+</strong><span>verified brokers</span></div>
+        <div><strong>24/7</strong><span>lead capture</span></div>
+        <div><strong>150+</strong><span>countries covered</span></div>
       </section>
 
-      <section className="container seller-cta">
-        <div className="cta-emblem"><MarineIcon name="sell" /></div>
+      <section className="container bm-seller-panel">
         <div>
-          <span className="section-kicker">For sellers and brokers</span>
-          <h2>Sell your boat. Reach more serious buyers.</h2>
-          <p>Turn the Boatshed broker network into a modern global marketplace with cleaner adverts, better lead capture and stronger supplier opportunities.</p>
+          <span className="bm-kicker">For brokers and private sellers</span>
+          <h2>List beautifully. Capture better leads. Sell with confidence.</h2>
+          <p>A premium front end for a serious marketplace: stronger visual trust, better mobile search and a cleaner route from advert to enquiry.</p>
         </div>
-        <div className="cta-buttons">
-          <Link href="/sell" className="primary-cta">List your boat</Link>
-          <Link href="/pricing" className="secondary-cta dark">Broker plans</Link>
+        <div className="bm-seller-actions">
+          <Link className="bm-primary" href="/sell">List your boat</Link>
+          <Link className="bm-secondary bm-secondary-light" href="/pricing">Broker plans</Link>
         </div>
       </section>
     </main>
