@@ -1,4 +1,4 @@
-import { createBoat } from '@/app/actions';
+import { createBoat } from '../actions';
 
 export default function SellPage({ searchParams }: { searchParams: { error?: string } }) {
   return (

@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase-server';
-import { approveBoat } from '@/app/actions';
+import { approveBoat } from '../actions';
 import { Boat } from '@/types/database';
 import { currencyGBP, titleCase } from '@/lib/format';
 

@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { createClient } from '@/lib/supabase-server';
 import { currencyGBP } from '@/lib/format';
-import { createEnquiry } from '@/app/actions';
+import { createEnquiry } from '../../actions';
 import { Boat } from '@/types/database';
 import { demoBoats, chandleryProducts, marineServices } from '@/lib/demo-data';
 import { ProductCard, ServiceCard } from '@/components/MarketplaceCards';

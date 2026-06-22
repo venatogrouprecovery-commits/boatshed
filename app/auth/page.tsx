@@ -1,4 +1,4 @@
-import { signIn, signUp } from '@/app/actions';
+import { signIn, signUp } from '../actions';
 
 export default function AuthPage({ searchParams }: { searchParams: { error?: string } }) {
   return (
