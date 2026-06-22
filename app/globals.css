@@ -1120,3 +1120,154 @@ body { background: linear-gradient(180deg, #f8f6f0 0%, #f2efe7 100%); }
   .marina-directory-grid .marina-panel img { width: 100%; height: auto; aspect-ratio: 16 / 9; }
   .results-bar { flex-direction: column; align-items: flex-start; }
 }
+
+/* Final mobile navigation + brand logo reliability patch */
+.mobile-menu-v2 { display: none; margin-left: auto; position: relative; z-index: 100; }
+.mobile-nav-toggle { position: absolute; opacity: 0; pointer-events: none; }
+.mobile-nav-button {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.28);
+  background: rgba(255,255,255,.10);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  box-shadow: 0 12px 26px rgba(0,0,0,.18);
+}
+.mobile-nav-button span {
+  width: 21px;
+  height: 2px;
+  border-radius: 999px;
+  background: #fff;
+  transition: transform .18s ease, opacity .18s ease;
+}
+.mobile-nav-toggle:checked + .mobile-nav-button span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.mobile-nav-toggle:checked + .mobile-nav-button span:nth-child(2) { opacity: 0; }
+.mobile-nav-toggle:checked + .mobile-nav-button span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.mobile-menu-panel-v2 {
+  position: fixed;
+  top: 76px;
+  left: 14px;
+  right: 14px;
+  display: none;
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(6,29,56,.985);
+  border: 1px solid rgba(255,255,255,.16);
+  box-shadow: 0 26px 80px rgba(0,0,0,.34);
+  backdrop-filter: blur(16px);
+}
+.mobile-nav-toggle:checked ~ .mobile-menu-panel-v2 { display: grid; gap: 6px; }
+.mobile-menu-panel-v2 a,
+.mobile-menu-panel-v2 button {
+  min-height: 48px;
+  width: 100%;
+  padding: 0 15px;
+  border-radius: 12px;
+  border: 0;
+  background: transparent;
+  color: rgba(255,255,255,.92);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font: inherit;
+  font-weight: 800;
+  letter-spacing: -.01em;
+}
+.mobile-menu-panel-v2 a:hover,
+.mobile-menu-panel-v2 button:hover { background: rgba(255,255,255,.09); color: #fff; }
+.mobile-menu-panel-v2 .mobile-cta { justify-content: center; background: var(--gold); color: #181101; margin-top: 6px; }
+
+.brand-logo-card,
+.brand-directory-card,
+.brand-directory-logo { overflow: hidden; }
+.brand-logo-card img,
+.brand-directory-logo img {
+  display: block;
+  width: min(150px, 90%);
+  height: 52px;
+  object-fit: contain;
+  filter: none !important;
+}
+.brand-directory-logo img { width: 128px; height: 46px; }
+.brand-logo-card span { display: block !important; font-size: .78rem; font-weight: 900; color: var(--navy); letter-spacing: .04em; }
+.brand-logo-card em { margin-top: -4px; }
+
+@media (max-width: 1180px) {
+  .desktop-nav, .nav-actions, .mobile-menu { display: none !important; }
+  .mobile-menu-v2 { display: block !important; }
+  .nav-shell { gap: 14px; }
+  .brand-link { flex: 1 1 auto; }
+}
+@media (max-width: 720px) {
+  .nav-shell { width: calc(100% - 24px); height: 68px; }
+  .site-header { min-height: 68px; }
+  .mobile-menu-panel-v2 { top: 68px; }
+  .brand-lockup { min-width: 0; }
+  .brand-word { font-size: 1.08rem; letter-spacing: .09em; }
+  .brand-wave { width: 64px; height: 7px; }
+}
+
+/* Robust brand logo rendering patch */
+.brand-mark {
+  width: min(156px, 92%);
+  height: 58px;
+  display: grid;
+  place-items: center;
+  position: relative;
+  z-index: 1;
+}
+.brand-mark img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  filter: none !important;
+}
+.brand-mark-compact {
+  width: 130px;
+  height: 48px;
+  place-items: start;
+}
+.brand-mark-fallback {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  border: 1px solid rgba(6,29,56,.14);
+  background: linear-gradient(145deg, #fff, #f0ece2);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 6px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.8);
+}
+.brand-mark-fallback strong {
+  color: var(--navy);
+  font-size: 1rem;
+  letter-spacing: .08em;
+  line-height: 1;
+}
+.brand-mark-fallback span {
+  display: block !important;
+  color: rgba(6,29,56,.72);
+  font-size: .58rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  line-height: 1.05;
+  margin-top: 3px;
+}
+.brand-logo-card .brand-mark + span {
+  display: block !important;
+  font-size: .78rem;
+  font-weight: 900;
+  color: var(--navy);
+  letter-spacing: .04em;
+}
+.brand-directory-logo .brand-mark { justify-items: start; }
+.brand-directory-logo .brand-mark-fallback { max-width: 128px; }

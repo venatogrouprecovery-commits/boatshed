@@ -17,6 +17,7 @@ import {
 } from '@/lib/demo-data';
 import { BoatshedLogo, PremiumIcon } from '@/components/PremiumIcons';
 import { currencyGBP } from '@/lib/format';
+import { BrandLogo } from '@/components/BrandLogo';
 
 const trustItems = [
   { icon: 'broker' as const, title: 'Broker inspected', text: 'Quality checked' },
@@ -118,12 +119,12 @@ export default async function Home() {
         <div className="brand-showcase-head">
           <span className="section-kicker">Brands across the marketplace</span>
           <h2>Search boats, equipment and services from names buyers recognise.</h2>
-          <p>Logo placements shown for demo authenticity. Final launch should use approved brand assets and supplier permissions.</p>
+          <p>Live brand-logo placements for demo authenticity; replace with licensed local assets before public launch.</p>
         </div>
         <div className="brand-logo-rail">
           {brandLogos.slice(0, 12).map((brand) => (
             <article className="brand-logo-card" key={brand.name}>
-              <img src={brand.logo_url} alt={`${brand.name} logo`} />
+              <BrandLogo brand={brand} />
               <span>{brand.name}</span>
               <em>{brand.category}</em>
             </article>
@@ -298,7 +299,7 @@ export default async function Home() {
         <div className="brand-directory-grid">
           {brandLogos.map((brand) => (
             <article className="brand-directory-card" key={brand.name}>
-              <div className="brand-directory-logo"><img src={brand.logo_url} alt={`${brand.name} logo`} /></div>
+              <div className="brand-directory-logo"><BrandLogo brand={brand} compact /></div>
               <div>
                 <strong>{brand.name}</strong>
                 <span>{brand.category}</span>
