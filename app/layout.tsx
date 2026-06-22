@@ -47,17 +47,18 @@ async function Nav() {
             </>
           )}
         </div>
-        <details className="mobile-menu">
-          <summary aria-label="Open navigation menu">
+        <div className="mobile-menu-v2">
+          <input id="mobile-nav-toggle" className="mobile-nav-toggle" type="checkbox" aria-hidden="true" />
+          <label className="mobile-nav-button" htmlFor="mobile-nav-toggle" aria-label="Open navigation menu">
             <span></span><span></span><span></span>
-          </summary>
-          <div className="mobile-menu-panel">
+          </label>
+          <nav className="mobile-menu-panel-v2" aria-label="Mobile navigation">
             <Link href="/boats">Boats</Link>
             <Link href="/chandlery">Chandlery</Link>
             <Link href="/services">Services</Link>
             <Link href="/marinas">Marinas</Link>
-            <Link href="/sell">Sell</Link>
-            <Link href="/pricing">Brokers</Link>
+            <Link href="/sell">Sell your boat</Link>
+            <Link href="/pricing">Broker plans</Link>
             {user ? (
               <>
                 <Link href="/dashboard">Dashboard</Link>
@@ -69,8 +70,8 @@ async function Nav() {
                 <Link className="mobile-cta" href="/sell">List your boat</Link>
               </>
             )}
-          </div>
-        </details>
+          </nav>
+        </div>
       </div>
     </header>
   );

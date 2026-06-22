@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 92" role="img" aria-label="NAVIONICS logo">
+  <rect width="260" height="92" rx="14" fill="#ffffff"/>
+  <rect x="8" y="8" width="244" height="76" rx="10" fill="#005aa9"/>
+  <path d="M28 64 C64 44, 96 84, 132 62 S198 43, 232 64" fill="none" stroke="#49a942" stroke-width="5" stroke-linecap="round" opacity=".92"/>
+  <text x="130" y="43" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="800" letter-spacing="1.8" fill="#49a942">NAVIONICS</text>
+</svg>
