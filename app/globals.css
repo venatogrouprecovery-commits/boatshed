@@ -88,6 +88,78 @@ a { color: inherit; }
 }
 .desktop-nav a:hover, .nav-link-subtle:hover { color: white; }
 .nav-actions { display: flex; align-items: center; gap: 14px; }
+
+.mobile-menu {
+  display: none;
+  position: relative;
+  margin-left: 4px;
+}
+.mobile-menu summary {
+  list-style: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.24);
+  background: rgba(255,255,255,.08);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+}
+.mobile-menu summary::-webkit-details-marker { display: none; }
+.mobile-menu summary span {
+  width: 19px;
+  height: 2px;
+  border-radius: 999px;
+  background: white;
+  transition: transform .18s ease, opacity .18s ease;
+}
+.mobile-menu[open] summary span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.mobile-menu[open] summary span:nth-child(2) { opacity: 0; }
+.mobile-menu[open] summary span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.mobile-menu-panel {
+  position: absolute;
+  top: calc(100% + 14px);
+  right: 0;
+  width: min(88vw, 340px);
+  padding: 12px;
+  border-radius: 16px;
+  background: rgba(6,29,56,.98);
+  border: 1px solid rgba(255,255,255,.14);
+  box-shadow: 0 24px 70px rgba(0,0,0,.28);
+  display: grid;
+  gap: 4px;
+}
+.mobile-menu-panel a,
+.mobile-menu-panel button {
+  width: 100%;
+  min-height: 46px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: rgba(255,255,255,.88);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  font: inherit;
+  font-size: .94rem;
+  font-weight: 750;
+  text-align: left;
+  cursor: pointer;
+}
+.mobile-menu-panel a:hover,
+.mobile-menu-panel button:hover { background: rgba(255,255,255,.08); color: white; }
+.mobile-menu-panel .mobile-cta {
+  margin-top: 6px;
+  background: var(--gold);
+  color: #15120a;
+  justify-content: center;
+  box-shadow: 0 12px 26px rgba(217,167,53,.22);
+}
 .button {
   min-height: 43px;
   padding: 0 18px;
@@ -337,6 +409,7 @@ input, textarea, select { font: inherit; }
 
 @media (max-width: 1080px) {
   .desktop-nav { display: none; }
+  .mobile-menu { display: block; }
   .nav-shell { width: min(100% - 28px, 920px); }
   .hero-shell, .section, .marketplace-expansion, .stats-band, .seller-cta, .footer-grid { width: min(100% - 28px, 920px); }
   .hero-mobile-card { display: none; }
@@ -346,6 +419,7 @@ input, textarea, select { font: inherit; }
   .marketplace-expansion { grid-template-columns: 1fr; }
 }
 @media (max-width: 720px) {
+  .nav-actions { display: none; }
   .nav-actions .nav-link-subtle { display: none; }
   .brand-lockup { min-width: 140px; }
   .brand-word { font-size: 1.26rem; }
@@ -650,4 +724,399 @@ input, textarea, select { font: inherit; }
   .feature-layout > .listing-card .listing-card-image { height: 230px; }
   .offer-card, .video-card { min-height: 310px; }
   .review-card { grid-template-columns: 82px 1fr; }
+}
+
+/* Premium polish pass: consistent imagery, brand-led marketplace, additional pages */
+:root {
+  --cream: #f3f0e8;
+  --charcoal: #111820;
+  --hairline: rgba(7, 24, 39, .095);
+}
+
+body { background: linear-gradient(180deg, #f8f6f0 0%, #f2efe7 100%); }
+.site-header { box-shadow: 0 8px 30px rgba(0,0,0,.08); }
+.brand-word { font-weight: 700; }
+
+/* Make all media feel intentionally cropped rather than random */
+.listing-card-image,
+.offer-card,
+.video-card,
+.service-panel-image,
+.market-card img,
+.marina-panel img,
+.review-card img,
+.brand-directory-logo,
+.brand-logo-card {
+  background: #ede9df;
+}
+
+.listing-card,
+.service-panel,
+.market-card,
+.marina-panel,
+.guide-card,
+.review-stack,
+.brand-directory-card,
+.brand-logo-card {
+  border-color: rgba(7, 24, 39, .10);
+}
+
+.listing-card-image { aspect-ratio: 16 / 10; height: auto; }
+.compact-feature-grid .listing-card-image { height: auto; aspect-ratio: 16 / 10; }
+.feature-layout > .listing-card .listing-card-image { height: auto; aspect-ratio: 16 / 10.8; }
+.service-card img,
+.product-card img,
+.marina-card img,
+.service-panel-image img,
+.market-card img,
+.marina-panel img,
+.review-card img { object-fit: cover; }
+
+/* Brand showcase */
+.brand-showcase {
+  width: min(1150px, calc(100% - 40px));
+  margin: 34px auto 0;
+  padding: 36px 0 4px;
+}
+.brand-showcase-head {
+  display: grid;
+  grid-template-columns: .9fr 1.15fr;
+  gap: 30px;
+  align-items: end;
+  margin-bottom: 18px;
+}
+.brand-showcase-head h2 {
+  font-family: "Playfair Display", Georgia, serif;
+  color: var(--navy);
+  font-size: clamp(1.8rem, 3vw, 2.7rem);
+  line-height: 1.03;
+  letter-spacing: -.04em;
+  margin: 0;
+}
+.brand-showcase-head p {
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.65;
+}
+.brand-logo-rail {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+}
+.brand-logo-card {
+  position: relative;
+  min-height: 122px;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 8px;
+  padding: 18px 14px;
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  background: rgba(255,255,255,.78);
+  box-shadow: 0 12px 34px rgba(6,29,56,.045);
+  overflow: hidden;
+}
+.brand-logo-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(140deg, rgba(217,167,53,.08), transparent 45%);
+  pointer-events: none;
+}
+.brand-logo-card img {
+  width: 112px;
+  height: 38px;
+  object-fit: contain;
+  filter: saturate(.1) contrast(1.08);
+  position: relative;
+  z-index: 1;
+}
+.brand-logo-card span {
+  display: none;
+}
+.brand-logo-card em {
+  font-style: normal;
+  color: var(--muted);
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+}
+.brand-directory-section { padding-top: 62px; }
+.brand-directory-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+}
+.brand-directory-card {
+  min-height: 112px;
+  padding: 16px;
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  background: rgba(255,255,255,.86);
+  display: grid;
+  align-content: space-between;
+  gap: 13px;
+  box-shadow: 0 10px 28px rgba(6,29,56,.045);
+}
+.brand-directory-logo {
+  height: 42px;
+  display: flex;
+  align-items: center;
+}
+.brand-directory-logo img {
+  max-width: 126px;
+  max-height: 34px;
+  object-fit: contain;
+  filter: grayscale(1) contrast(1.02);
+}
+.brand-directory-card strong {
+  display: block;
+  color: var(--navy);
+  font-size: .93rem;
+  line-height: 1.1;
+}
+.brand-directory-card span {
+  display: block;
+  color: var(--muted);
+  font-size: .76rem;
+  margin-top: 3px;
+}
+.compact-brands { grid-template-columns: repeat(4, 1fr); }
+
+/* More premium marketplace cards */
+.offer-grid { grid-template-columns: 1.25fr 1fr 1fr; }
+.offer-card { border: 1px solid rgba(255,255,255,.2); }
+.offer-card:first-child { min-height: 410px; grid-row: span 2; }
+.offer-card:not(:first-child) { min-height: 196px; }
+.offer-card:not(:first-child) h3 { font-size: 1.35rem; }
+.offer-card:not(:first-child) p { display: none; }
+
+.marketplace-expansion { align-items: stretch; }
+.marketplace-copy { display: flex; flex-direction: column; justify-content: space-between; }
+.marketplace-panels .mini-panel { box-shadow: 0 18px 50px rgba(6,29,56,.07); }
+.service-panel {
+  background: white;
+  border: 1px solid var(--hairline);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 32px rgba(6,29,56,.045);
+}
+.service-panel-image img { width: 100%; aspect-ratio: 16 / 9; height: auto; object-fit: cover; }
+.service-panel-copy { padding: 18px; }
+.service-panel-copy h3 { color: var(--navy); font-size: 1.06rem; margin: 0 0 8px; }
+.service-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
+.service-tags span { background: #f0ece2; color: var(--navy); border-radius: 999px; padding: 5px 8px; font-size: .68rem; font-weight: 800; }
+.market-card, .marina-panel { transition: transform .18s ease, box-shadow .18s ease; }
+.market-card:hover, .marina-panel:hover, .brand-directory-card:hover, .brand-logo-card:hover { transform: translateY(-2px); box-shadow: var(--soft-shadow); }
+
+/* Additional pages */
+.subpage {
+  background: linear-gradient(180deg, #f8f6f0 0, #f2efe7 100%);
+  min-height: 70vh;
+}
+.subpage-hero {
+  width: min(1240px, calc(100% - 40px));
+  margin: 28px auto 0;
+  min-height: 380px;
+  border-radius: 26px;
+  overflow: hidden;
+  padding: clamp(34px, 5vw, 68px);
+  color: white;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 30px 90px rgba(6,29,56,.18);
+}
+.subpage-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(6,29,56,.82), rgba(6,29,56,.42) 58%, rgba(6,29,56,.65));
+}
+.subpage-hero > * { position: relative; z-index: 1; }
+.subpage-hero h1 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(2.45rem, 5vw, 4.8rem);
+  line-height: .98;
+  max-width: 830px;
+  margin: 0;
+  letter-spacing: -.045em;
+}
+.subpage-hero p {
+  max-width: 690px;
+  color: rgba(255,255,255,.80);
+  margin: 18px 0 26px;
+  line-height: 1.65;
+  font-size: 1.03rem;
+}
+.boats-hero { background-image: url('https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?auto=format&fit=crop&w=2200&q=86'); }
+.chandlery-hero { background-image: url('https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=2200&q=86'); }
+.services-hero { background-image: url('https://images.unsplash.com/photo-1540946485063-a40da27545f8?auto=format&fit=crop&w=2200&q=86'); }
+.marinas-hero { background-image: url('https://images.unsplash.com/photo-1519677100203-a0e668c92439?auto=format&fit=crop&w=2200&q=86'); }
+.subpage-search,
+.subpage-search-panel {
+  width: min(860px, 100%);
+  border-radius: 16px;
+  background: rgba(255,255,255,.94);
+  padding: 12px;
+  box-shadow: 0 22px 54px rgba(0,0,0,.16);
+}
+.subpage-search { display: grid; grid-template-columns: 1fr auto; gap: 10px; }
+.subpage-search input {
+  border: 1px solid var(--hairline);
+  min-height: 54px;
+  border-radius: 10px;
+  padding: 0 16px;
+  outline: none;
+  color: var(--ink);
+}
+.subpage-search button {
+  border: 0;
+  border-radius: 10px;
+  background: var(--gold);
+  color: #15120a;
+  padding: 0 22px;
+  font-weight: 900;
+}
+.subpage-search-panel .premium-search { box-shadow: none; border: 0; }
+.subpage-search-panel .search-tabs { display: none; }
+.subpage-section {
+  width: min(1150px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 46px 0 16px;
+}
+.filter-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-bottom: 26px;
+}
+.filter-pills span {
+  border: 1px solid var(--hairline);
+  background: rgba(255,255,255,.75);
+  color: var(--navy);
+  border-radius: 999px;
+  padding: 8px 13px;
+  font-size: .78rem;
+  font-weight: 850;
+}
+.product-market-grid,
+.service-directory-grid,
+.boats-results-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.product-market-grid .market-card {
+  display: grid;
+  grid-template-columns: 128px 1fr;
+  gap: 16px;
+  align-items: center;
+  padding: 14px;
+  background: white;
+  border: 1px solid var(--hairline);
+  border-radius: 16px;
+  box-shadow: 0 12px 32px rgba(6,29,56,.045);
+}
+.product-market-grid .market-card img {
+  width: 128px;
+  height: 128px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+.product-market-grid .market-card .eyebrow { margin: 0 0 6px; letter-spacing: .08em; font-size: .62rem; }
+.product-market-grid .market-card h3 { margin: 0; color: var(--navy); font-size: 1rem; }
+.product-market-grid .market-card footer { margin-top: 12px; display: flex; justify-content: space-between; align-items: center; }
+.product-market-grid .market-card footer a { color: var(--navy); font-weight: 850; text-decoration: none; }
+.service-directory-grid .service-panel-image img { aspect-ratio: 16 / 10; }
+.marina-directory-layout { display: grid; grid-template-columns: .82fr 1.18fr; gap: 26px; align-items: start; }
+.large-map-panel {
+  background: var(--navy);
+  color: white;
+  border-radius: 20px;
+  padding: 22px;
+  position: sticky;
+  top: 100px;
+}
+.large-map-panel h2 { font-family: "Playfair Display", Georgia, serif; font-size: 2rem; margin: 18px 0 8px; }
+.large-map-panel p { color: rgba(255,255,255,.72); line-height: 1.6; margin: 0; }
+.big-map { height: 280px; border-radius: 16px; }
+.marina-directory-grid { display: grid; gap: 18px; }
+.marina-directory-grid .marina-panel {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 18px;
+  align-items: center;
+  padding: 14px;
+  background: white;
+  border: 1px solid var(--hairline);
+  border-radius: 18px;
+  box-shadow: 0 12px 32px rgba(6,29,56,.045);
+}
+.marina-directory-grid .marina-panel img { width: 220px; height: 150px; border-radius: 13px; }
+.marina-directory-grid .marina-panel h3 { font-size: 1.25rem; }
+.results-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+  background: rgba(255,255,255,.72);
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  padding: 16px 18px;
+  color: var(--muted);
+}
+.results-bar strong { color: var(--navy); }
+.empty-state { padding: 30px; border-radius: 16px; background: white; border: 1px solid var(--hairline); color: var(--navy); }
+
+/* Make legacy Bootstrap pages less jarring */
+.container.py-5, main.container {
+  width: min(1150px, calc(100% - 40px));
+  background: rgba(255,255,255,.62);
+  border: 1px solid var(--hairline);
+  border-radius: 22px;
+  margin-top: 34px;
+  margin-bottom: 44px;
+  padding: 34px !important;
+  box-shadow: 0 12px 38px rgba(6,29,56,.05);
+}
+.btn-primary, .text-bg-primary { background-color: var(--navy) !important; border-color: var(--navy) !important; }
+.form-control, .form-select { border-color: var(--hairline); border-radius: 10px; }
+
+@media (max-width: 1080px) {
+  .brand-logo-rail { grid-template-columns: repeat(4, 1fr); }
+  .brand-directory-grid, .compact-brands { grid-template-columns: repeat(3, 1fr); }
+  .offer-grid,
+  .product-market-grid,
+  .service-directory-grid,
+  .boats-results-grid,
+  .marina-directory-layout { grid-template-columns: repeat(2, 1fr); }
+  .offer-card:first-child { grid-row: auto; }
+  .marina-directory-layout { grid-template-columns: 1fr; }
+  .large-map-panel { position: static; }
+}
+@media (max-width: 720px) {
+  .brand-showcase-head { grid-template-columns: 1fr; }
+  .brand-logo-rail { grid-template-columns: repeat(2, 1fr); }
+  .brand-directory-grid, .compact-brands,
+  .offer-grid,
+  .product-market-grid,
+  .service-directory-grid,
+  .boats-results-grid { grid-template-columns: 1fr; }
+  .subpage-hero { width: 100%; margin-top: 0; border-radius: 0; min-height: 430px; padding: 34px 22px; }
+  .subpage-search { grid-template-columns: 1fr; }
+  .subpage-section, .brand-showcase { width: min(100% - 28px, 680px); }
+  .product-market-grid .market-card { grid-template-columns: 100px 1fr; }
+  .product-market-grid .market-card img { width: 100px; height: 100px; }
+  .marina-directory-grid .marina-panel { grid-template-columns: 1fr; }
+  .marina-directory-grid .marina-panel img { width: 100%; height: auto; aspect-ratio: 16 / 9; }
+  .results-bar { flex-direction: column; align-items: flex-start; }
 }

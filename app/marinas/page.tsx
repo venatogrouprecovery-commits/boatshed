@@ -3,25 +3,27 @@ import { marinaListings } from '@/lib/demo-data';
 
 export default function MarinasPage() {
   return (
-    <main className="container py-5">
-      <div className="row align-items-end gy-3 mb-4">
-        <div className="col-lg-8">
-          <span className="badge text-bg-primary mb-2">Demo berths and yard offers</span>
-          <h1 className="fw-bold">Marinas and berths</h1>
-          <p className="text-muted mb-0">Advertise pontoon berths, hardstanding, winter storage, lift-out packages and yard facilities.</p>
+    <main className="subpage">
+      <section className="subpage-hero marinas-hero">
+        <span className="section-kicker">Marinas, berths and yards</span>
+        <h1>Annual berths, visitor moorings, lift-outs and winter storage.</h1>
+        <p>Showcase berth adverts and yard packages alongside the boat marketplace so buyers can solve the whole ownership journey.</p>
+        <div className="subpage-search">
+          <input placeholder="Search location, berth size or marina..." />
+          <button>Check availability</button>
         </div>
-        <div className="col-lg-4">
-          <div className="input-group">
-            <input className="form-control" placeholder="Search location" />
-            <button className="btn btn-primary">Search</button>
-          </div>
+      </section>
+
+      <section className="subpage-section marina-directory-layout">
+        <aside className="large-map-panel">
+          <div className="concept-map big-map"><i /><b /></div>
+          <h2>Featured berth availability</h2>
+          <p>Premium map-style placement for marinas, yard services and seasonal packages.</p>
+        </aside>
+        <div className="marina-directory-grid">
+          {marinaListings.map((marina) => <MarinaCard marina={marina} key={marina.id} />)}
         </div>
-      </div>
-      <div className="row g-4">
-        {marinaListings.map((marina) => (
-          <div className="col-12 col-md-6 col-xl-4" key={marina.id}><MarinaCard marina={marina} /></div>
-        ))}
-      </div>
+      </section>
     </main>
   );
 }

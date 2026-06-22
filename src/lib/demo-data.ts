@@ -240,3 +240,34 @@ export const marineGuides: MarineGuide[] = [
   { id: 'guide-chandlery', category: 'Refit', title: 'The first 20 things to upgrade on an older cruiser', summary: 'Safety kit, batteries, chargers, bilge pumps, navigation and comfort upgrades ranked.' },
   { id: 'guide-berthing', category: 'Marinas', title: 'Annual berth checklist for 35–45ft boats', summary: 'Depth, access, shore power, lift-out, liveaboard rules, parking and hidden fees.' }
 ];
+
+
+export type BrandLogo = {
+  name: string;
+  category: string;
+  domain: string;
+  logo_url: string;
+};
+
+export const brandLogos: BrandLogo[] = [
+  { name: 'Fairline', category: 'Boat builders', domain: 'fairline.com', logo_url: 'https://logo.clearbit.com/fairline.com' },
+  { name: 'Princess', category: 'Boat builders', domain: 'princessyachts.com', logo_url: 'https://logo.clearbit.com/princessyachts.com' },
+  { name: 'Sunseeker', category: 'Boat builders', domain: 'sunseeker.com', logo_url: 'https://logo.clearbit.com/sunseeker.com' },
+  { name: 'Beneteau', category: 'Boat builders', domain: 'beneteau.com', logo_url: 'https://logo.clearbit.com/beneteau.com' },
+  { name: 'Jeanneau', category: 'Boat builders', domain: 'jeanneau.com', logo_url: 'https://logo.clearbit.com/jeanneau.com' },
+  { name: 'Bavaria', category: 'Boat builders', domain: 'bavariayachts.com', logo_url: 'https://logo.clearbit.com/bavariayachts.com' },
+  { name: 'Volvo Penta', category: 'Engines', domain: 'volvopenta.com', logo_url: 'https://logo.clearbit.com/volvopenta.com' },
+  { name: 'Yamaha', category: 'Outboards', domain: 'yamaha-motor.eu', logo_url: 'https://logo.clearbit.com/yamaha-motor.eu' },
+  { name: 'Mercury', category: 'Outboards', domain: 'mercurymarine.com', logo_url: 'https://logo.clearbit.com/mercurymarine.com' },
+  { name: 'Garmin', category: 'Electronics', domain: 'garmin.com', logo_url: 'https://logo.clearbit.com/garmin.com' },
+  { name: 'Raymarine', category: 'Electronics', domain: 'raymarine.com', logo_url: 'https://logo.clearbit.com/raymarine.com' },
+  { name: 'Victron Energy', category: 'Power', domain: 'victronenergy.com', logo_url: 'https://logo.clearbit.com/victronenergy.com' },
+  { name: 'Lewmar', category: 'Deck gear', domain: 'lewmar.com', logo_url: 'https://logo.clearbit.com/lewmar.com' },
+  { name: 'Force 4', category: 'Chandlery', domain: 'force4.co.uk', logo_url: 'https://logo.clearbit.com/force4.co.uk' },
+  { name: 'Spinlock', category: 'Safety', domain: 'spinlock.co.uk', logo_url: 'https://logo.clearbit.com/spinlock.co.uk' },
+  { name: 'Crewsaver', category: 'Life jackets', domain: 'crewsaver.com', logo_url: 'https://logo.clearbit.com/crewsaver.com' },
+  { name: 'Gill', category: 'Clothing', domain: 'gillmarine.com', logo_url: 'https://logo.clearbit.com/gillmarine.com' },
+  { name: 'Musto', category: 'Clothing', domain: 'musto.com', logo_url: 'https://logo.clearbit.com/musto.com' },
+  { name: 'Helly Hansen', category: 'Clothing', domain: 'hellyhansen.com', logo_url: 'https://logo.clearbit.com/hellyhansen.com' },
+  { name: 'Plastimo', category: 'Chandlery', domain: 'plastimo.com', logo_url: 'https://logo.clearbit.com/plastimo.com' }
+];

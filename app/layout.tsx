@@ -47,6 +47,30 @@ async function Nav() {
             </>
           )}
         </div>
+        <details className="mobile-menu">
+          <summary aria-label="Open navigation menu">
+            <span></span><span></span><span></span>
+          </summary>
+          <div className="mobile-menu-panel">
+            <Link href="/boats">Boats</Link>
+            <Link href="/chandlery">Chandlery</Link>
+            <Link href="/services">Services</Link>
+            <Link href="/marinas">Marinas</Link>
+            <Link href="/sell">Sell</Link>
+            <Link href="/pricing">Brokers</Link>
+            {user ? (
+              <>
+                <Link href="/dashboard">Dashboard</Link>
+                <form action={signOut}><button>Sign out</button></form>
+              </>
+            ) : (
+              <>
+                <Link href="/auth">Sign in</Link>
+                <Link className="mobile-cta" href="/sell">List your boat</Link>
+              </>
+            )}
+          </div>
+        </details>
       </div>
     </header>
   );

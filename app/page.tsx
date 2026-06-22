@@ -12,7 +12,8 @@ import {
   marineServices,
   marketplaceOffers,
   videoGuides,
-  boatReviews
+  boatReviews,
+  brandLogos
 } from '@/lib/demo-data';
 import { BoatshedLogo, PremiumIcon } from '@/components/PremiumIcons';
 import { currencyGBP } from '@/lib/format';
@@ -110,6 +111,23 @@ export default async function Home() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="brand-showcase" aria-label="Featured marine brands">
+        <div className="brand-showcase-head">
+          <span className="section-kicker">Brands across the marketplace</span>
+          <h2>Search boats, equipment and services from names buyers recognise.</h2>
+          <p>Logo placements shown for demo authenticity. Final launch should use approved brand assets and supplier permissions.</p>
+        </div>
+        <div className="brand-logo-rail">
+          {brandLogos.slice(0, 12).map((brand) => (
+            <article className="brand-logo-card" key={brand.name}>
+              <img src={brand.logo_url} alt={`${brand.name} logo`} />
+              <span>{brand.name}</span>
+              <em>{brand.category}</em>
+            </article>
+          ))}
         </div>
       </section>
 
@@ -261,6 +279,30 @@ export default async function Home() {
               <h3>{guide.title}</h3>
               <p>{guide.summary}</p>
               <Link href="/advice">Read guide</Link>
+            </article>
+          ))}
+        </div>
+      </section>
+
+
+
+      <section className="section brand-directory-section">
+        <div className="section-heading concept-heading">
+          <div>
+            <span className="section-kicker">Brand marketplace</span>
+            <h2>Boats, engines, electronics, safety and chandlery.</h2>
+            <p>Use recognisable marine names to make the marketplace feel stocked, commercial and credible from day one.</p>
+          </div>
+          <Link href="/chandlery" className="text-arrow">Browse suppliers <PremiumIcon name="arrow" /></Link>
+        </div>
+        <div className="brand-directory-grid">
+          {brandLogos.map((brand) => (
+            <article className="brand-directory-card" key={brand.name}>
+              <div className="brand-directory-logo"><img src={brand.logo_url} alt={`${brand.name} logo`} /></div>
+              <div>
+                <strong>{brand.name}</strong>
+                <span>{brand.category}</span>
+              </div>
             </article>
           ))}
         </div>

@@ -1,31 +1,47 @@
 import { ProductCard } from '@/components/MarketplaceCards';
-import { chandleryProducts } from '@/lib/demo-data';
+import { brandLogos, chandleryProducts } from '@/lib/demo-data';
 
 export default function ChandleryPage() {
   const categories = Array.from(new Set(chandleryProducts.map((item) => item.category)));
+  const chandleryBrands = brandLogos.filter((brand) => ['Chandlery', 'Safety', 'Life jackets', 'Clothing', 'Deck gear', 'Power', 'Electronics'].includes(brand.category));
   return (
-    <main className="container py-5">
-      <div className="row align-items-end gy-3 mb-4">
-        <div className="col-lg-8">
-          <span className="badge text-bg-primary mb-2">Demo chandlery</span>
-          <h1 className="fw-bold">Marine chandlery</h1>
-          <p className="text-muted mb-0">Demo products for refits, electronics, safety, galley upgrades and classic marine spares.</p>
+    <main className="subpage">
+      <section className="subpage-hero chandlery-hero">
+        <span className="section-kicker">Chandlery marketplace</span>
+        <h1>Gear, electronics, safety kit and upgrade deals.</h1>
+        <p>Demo commercial adverts for trusted chandlers, equipment suppliers and marine brands. Built to feel stocked before live sellers are onboarded.</p>
+        <div className="subpage-search">
+          <input placeholder="Search life jackets, electronics, ropes, chargers..." />
+          <button>Search chandlery</button>
         </div>
-        <div className="col-lg-4">
-          <div className="input-group">
-            <input className="form-control" placeholder="Search chandlery" />
-            <button className="btn btn-primary">Search</button>
+      </section>
+
+      <section className="subpage-section">
+        <div className="filter-pills">
+          {categories.map((category) => <span key={category}>{category}</span>)}
+        </div>
+        <div className="product-market-grid">
+          {chandleryProducts.map((product) => <ProductCard product={product} key={product.id} />)}
+        </div>
+      </section>
+
+      <section className="subpage-section supplier-strip-section">
+        <div className="section-heading concept-heading">
+          <div>
+            <span className="section-kicker">Featured suppliers</span>
+            <h2>Recognisable chandlery and equipment brands.</h2>
+            <p>Temporary demo logo placements for authenticity. Swap for approved official assets before public launch.</p>
           </div>
         </div>
-      </div>
-      <div className="d-flex flex-wrap gap-2 mb-4">
-        {categories.map((category) => <span key={category} className="badge rounded-pill text-bg-light border px-3 py-2">{category}</span>)}
-      </div>
-      <div className="row g-4">
-        {chandleryProducts.map((product) => (
-          <div className="col-12 col-md-6 col-xl-4" key={product.id}><ProductCard product={product} /></div>
-        ))}
-      </div>
+        <div className="brand-directory-grid compact-brands">
+          {chandleryBrands.map((brand) => (
+            <article className="brand-directory-card" key={brand.name}>
+              <div className="brand-directory-logo"><img src={brand.logo_url} alt={`${brand.name} logo`} /></div>
+              <div><strong>{brand.name}</strong><span>{brand.category}</span></div>
+            </article>
+          ))}
+        </div>
+      </section>
     </main>
   );
 }

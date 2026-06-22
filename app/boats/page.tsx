@@ -34,18 +34,27 @@ export default async function BoatsPage({ searchParams }: { searchParams: Record
   const boats = (liveBoats?.length ? liveBoats : filterDemoBoats(searchParams)) as Boat[];
 
   return (
-    <main className="container py-5">
-      <div className="mb-4">
-        <span className="badge text-bg-primary mb-2">Demo inventory included</span>
-        <h1 className="fw-bold">Boats for sale</h1>
-        <p className="text-muted">Filter by make, model, budget and location. When Supabase has live listings, they automatically replace the demo inventory.</p>
-      </div>
-      <div className="mb-5"><SearchForm initial={searchParams} /></div>
-      <div className="row g-4">
-        {boats.length ? boats.map((boat: Boat) => (
-          <div className="col-12 col-md-6 col-xl-4" key={boat.id}><BoatCard boat={boat} /></div>
-        )) : <div className="col-12"><div className="alert alert-warning">No matching approved listings.</div></div>}
-      </div>
+    <main className="subpage">
+      <section className="subpage-hero boats-hero">
+        <span className="section-kicker">Premium inventory</span>
+        <h1>Boats for sale across the marketplace.</h1>
+        <p>Filter by make, model, budget and location. Approved live listings replace the demo inventory automatically once Supabase is populated.</p>
+        <div className="subpage-search-panel"><SearchForm initial={searchParams} /></div>
+      </section>
+
+      <section className="subpage-section">
+        <div className="results-bar">
+          <strong>{boats.length} listings shown</strong>
+          <span>Broker, dealer and private seller adverts</span>
+        </div>
+        {boats.length ? (
+          <div className="boats-results-grid">
+            {boats.map((boat: Boat) => <BoatCard boat={boat} key={boat.id} />)}
+          </div>
+        ) : (
+          <div className="empty-state">No matching approved listings.</div>
+        )}
+      </section>
     </main>
   );
 }
