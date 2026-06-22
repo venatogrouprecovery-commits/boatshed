@@ -5,7 +5,21 @@ import { ProductCard, ServiceCard, MarinaCard } from '@/components/MarketplaceCa
 import { SearchForm } from '@/components/SearchForm';
 import { Boat } from '@/types/database';
 import { chandleryProducts, demoBoats, marinaListings, marineServices } from '@/lib/demo-data';
-import { PremiumIcon } from '@/components/PremiumIcons';
+import { BoatshedLogo, PremiumIcon } from '@/components/PremiumIcons';
+
+const trustItems = [
+  { icon: 'broker' as const, title: 'Broker inspected', text: 'Quality checked' },
+  { icon: 'shield' as const, title: 'Survey available', text: 'Full transparency' },
+  { icon: 'box' as const, title: 'Finance checked', text: 'Secure & verified' },
+  { icon: 'camera' as const, title: 'Video tour', text: 'See more remotely' }
+];
+
+const categories = [
+  { icon: 'anchor' as const, title: 'Sailboats', count: '1,842 boats', href: '/boats' },
+  { icon: 'engine' as const, title: 'Motor Yachts', count: '1,256 boats', href: '/boats' },
+  { icon: 'marina' as const, title: 'Liveaboards', count: '632 boats', href: '/boats' },
+  { icon: 'tools' as const, title: 'Project Boats', count: '216 boats', href: '/boats' }
+];
 
 export default async function Home() {
   let liveBoats: Boat[] | null = null;
@@ -26,120 +40,113 @@ export default async function Home() {
   }
 
   const boats = (liveBoats?.length ? liveBoats : demoBoats.slice(0, 6)) as Boat[];
-  const leadBoat = boats[0];
 
   return (
     <main>
-      <section className="hero-premium">
-        <div className="hero-media" />
-        <div className="hero-shade" />
-        <div className="hero-content">
-          <div className="hero-copy">
-            <span className="eyebrow hero-eyebrow">Boatshed Marketplace · premium marine search</span>
-            <h1>Buy, sell and source everything marine.</h1>
-            <p>One marketplace for serious boat buyers, brokers, suppliers, yards, engineers, chandlery and marina opportunities.</p>
-            <div className="hero-links">
-              <Link href="/boats" className="button button-orange">Browse boats</Link>
-              <Link href="/sell" className="button button-glass">Advertise now</Link>
+      <section className="concept-hero">
+        <div className="hero-shell">
+          <div className="hero-topline">
+            <span>International yacht brokers</span>
+            <span>Marketplace · Brokerage · Services</span>
+          </div>
+          <div className="hero-photo">
+            <div className="hero-copy">
+              <span className="eyebrow hero-eyebrow">Boatshed Marketplace</span>
+              <h1>Find your next boat with confidence</h1>
+              <p>The world’s trusted marketplace for buying and selling quality boats, backed by broker expertise and detailed listings.</p>
+            </div>
+            <div className="hero-mobile-card" aria-hidden="true">
+              <div className="phone-top"><BoatshedLogo compact /><PremiumIcon name="heart" /></div>
+              <h3>Find your next boat with confidence</h3>
+              <div className="phone-search-lines"><span /><span /><span /><span /></div>
             </div>
           </div>
-          <aside className="hero-feature-card" aria-label="Featured marketplace highlight">
-            <span>Featured listing</span>
-            <strong>{leadBoat?.title || 'Princess F45'}</strong>
-            <p>{leadBoat?.location || 'South Coast, UK'} · {leadBoat?.length_ft || 45} ft · {leadBoat?.category || 'Motor yacht'}</p>
-          </aside>
-        </div>
-      </section>
-
-      <section className="search-overlap">
-        <SearchForm />
-      </section>
-
-      <section className="section editorial-intro">
-        <div className="section-kicker">Marketplace scope</div>
-        <div className="editorial-grid">
-          <div>
-            <h2>Built around the way marine buyers actually search.</h2>
-            <p>Boatshed Marketplace should feel like a premium brokerage environment first, then open out into chandlery, services and berths without becoming a cluttered directory.</p>
+          <div className="hero-search-wrap">
+            <SearchForm />
           </div>
-          <div className="proof-strip">
-            <div><strong>12k+</strong><span>active listings vision</span></div>
-            <div><strong>24/7</strong><span>enquiry capture</span></div>
-            <div><strong>4</strong><span>revenue channels</span></div>
+          <div className="confidence-strip">
+            {trustItems.map((item) => (
+              <div key={item.title}>
+                <PremiumIcon name={item.icon} />
+                <span><strong>{item.title}</strong><em>{item.text}</em></span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="section featured-section">
-        <div className="section-heading">
+      <section className="section featured-boats-section">
+        <div className="section-heading concept-heading">
           <div>
-            <span className="section-kicker">Curated search</span>
-            <h2>Featured boats</h2>
+            <h2>Featured Boats</h2>
+            <p>Handpicked quality boats from our global network.</p>
           </div>
           <Link href="/boats" className="text-arrow">View all boats <PremiumIcon name="arrow" /></Link>
         </div>
-        <div className="listings-grid">
-          {boats.slice(0, 3).map((boat, index) => (
+        <div className="concept-listings-grid">
+          {boats.slice(0, 4).map((boat, index) => (
             <BoatCard boat={boat} priority={index === 0} key={boat.id} />
           ))}
         </div>
       </section>
 
-      <section className="section category-editorial">
-        <div className="category-hero">
-          <span className="section-kicker">Beyond listings</span>
-          <h2>More than a boat advert site.</h2>
-          <p>Give every marine business a place in the buyer journey: stock, services, parts, marinas and broker-led sale support.</p>
-          <Link href="/pricing" className="button button-dark">Broker packages</Link>
-        </div>
-        <div className="category-stack">
-          <Link href="/boats" className="category-row"><PremiumIcon name="anchor" /><span><strong>Boats</strong><em>Broker and private listings</em></span></Link>
-          <Link href="/chandlery" className="category-row"><PremiumIcon name="box" /><span><strong>Chandlery</strong><em>Equipment, electronics, spares</em></span></Link>
-          <Link href="/services" className="category-row"><PremiumIcon name="tools" /><span><strong>Services</strong><em>Engineering, transport, refit</em></span></Link>
-          <Link href="/marinas" className="category-row"><PremiumIcon name="marina" /><span><strong>Marinas</strong><em>Berths, yards and storage</em></span></Link>
-        </div>
-      </section>
-
-      <section className="section dark-service-band">
-        <div className="section-heading section-heading-on-dark">
+      <section className="section explore-section">
+        <div className="section-heading concept-heading">
           <div>
-            <span className="section-kicker">Vetted capability</span>
-            <h2>Marine services that support the sale.</h2>
+            <h2>Explore by Category</h2>
+            <p>Start with the right market segment, then refine by price, location and specification.</p>
           </div>
-          <Link href="/services" className="text-arrow text-arrow-light">View services <PremiumIcon name="arrow" /></Link>
+          <Link href="/boats" className="text-arrow">View all categories <PremiumIcon name="arrow" /></Link>
         </div>
-        <div className="services-grid">
-          {marineServices.slice(0, 3).map((service) => <ServiceCard service={service} key={service.id} />)}
+        <div className="category-pill-grid">
+          {categories.map((category) => (
+            <Link href={category.href} className="category-pill" key={category.title}>
+              <PremiumIcon name={category.icon} />
+              <span><strong>{category.title}</strong><em>{category.count}</em></span>
+            </Link>
+          ))}
         </div>
       </section>
 
-      <section className="section split-market">
-        <div>
-          <div className="section-heading compact-heading">
-            <div>
-              <span className="section-kicker">Chandlery</span>
-              <h2>Essential kit, without burying the boat search.</h2>
-            </div>
-          </div>
-          <div className="product-grid">
-            {chandleryProducts.slice(0, 3).map((product) => <ProductCard product={product} key={product.id} />)}
-          </div>
+      <section className="marketplace-expansion">
+        <div className="marketplace-copy">
+          <span className="eyebrow">Beyond brokerage</span>
+          <h2>Chandlery, services and berths — integrated without clutter.</h2>
+          <p>Boats remain the hero product. The wider marine marketplace supports the buyer journey with equipment, engineering, transport and marina options.</p>
         </div>
-        <div className="marina-feature">
-          <div className="marina-map"><PremiumIcon name="pin" /><span>Solent</span><i /><b /></div>
-          {marinaListings.slice(0, 2).map((marina) => <MarinaCard marina={marina} key={marina.id} />)}
+        <div className="marketplace-panels">
+          <div className="mini-panel">
+            <div className="mini-panel-head"><PremiumIcon name="tools" /><span>Marine Services</span></div>
+            {marineServices.slice(0, 2).map((service) => <ServiceCard service={service} key={service.id} />)}
+          </div>
+          <div className="mini-panel">
+            <div className="mini-panel-head"><PremiumIcon name="box" /><span>Chandlery Highlights</span></div>
+            {chandleryProducts.slice(0, 2).map((product) => <ProductCard product={product} key={product.id} />)}
+          </div>
+          <div className="mini-panel marina-mini">
+            <div className="mini-panel-head"><PremiumIcon name="marina" /><span>Marinas & Berths</span></div>
+            <div className="concept-map"><PremiumIcon name="pin" /><i /><b /></div>
+            {marinaListings.slice(0, 1).map((marina) => <MarinaCard marina={marina} key={marina.id} />)}
+          </div>
         </div>
       </section>
 
-      <section className="seller-cta">
+      <section className="stats-band">
+        <div><PremiumIcon name="shield" /><strong>30+ Years</strong><span>of experience</span></div>
+        <div><PremiumIcon name="anchor" /><strong>25,000+</strong><span>boats sold</span></div>
+        <div><PremiumIcon name="globe" /><strong>120+</strong><span>countries covered</span></div>
+        <div><PremiumIcon name="star" /><strong>5★ Service</strong><span>rated by clients</span></div>
+      </section>
+
+      <section className="seller-cta concept-cta">
         <div>
-          <span className="section-kicker">For sellers and brokers</span>
+          <span className="eyebrow">For sellers and brokers</span>
           <h2>List once. Reach serious marine buyers.</h2>
-          <p>Use the marketplace as a cleaner front door for stock, services and enquiries while keeping the buyer experience premium.</p>
+          <p>A premium front door for stock, services and enquiries — built for credibility, not classified-site clutter.</p>
         </div>
         <div className="cta-actions">
-          <Link href="/sell" className="button button-orange">List your boat</Link>
-          <Link href="/pricing" className="button button-glass-dark">Broker plans</Link>
+          <Link href="/sell" className="button button-gold">List your boat</Link>
+          <Link href="/pricing" className="button button-outline-light">Broker plans</Link>
         </div>
       </section>
     </main>
