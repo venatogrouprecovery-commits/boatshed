@@ -118,3 +118,125 @@ export const marinaListings: MarinaListing[] = [
   { id: 'mar-002', name: 'Fambridge Yacht Haven', location: 'River Crouch, Essex', berth_size: 'Up to 50 ft', price_note: 'River and marina options', image_url: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80', facilities: ['Lift-out', 'Hardstanding', 'Engineering', 'Fuel nearby'] },
   { id: 'mar-003', name: 'Chichester Marina', location: 'West Sussex', berth_size: 'Up to 60 ft', price_note: 'Brokerage-friendly marina', image_url: 'https://images.unsplash.com/photo-1562979314-bee7453e911c?auto=format&fit=crop&w=900&q=80', facilities: ['Fuel', 'Restaurants', 'Chandlery', 'Repair services'] }
 ];
+
+export type MarketplaceOffer = {
+  id: string;
+  type: string;
+  title: string;
+  description: string;
+  price_note: string;
+  href: string;
+  image_url: string;
+};
+
+export type VideoGuide = {
+  id: string;
+  title: string;
+  category: string;
+  duration: string;
+  description: string;
+  image_url: string;
+};
+
+export type BoatReview = {
+  id: string;
+  title: string;
+  type: string;
+  summary: string;
+  image_url: string;
+};
+
+export type MarineGuide = {
+  id: string;
+  title: string;
+  category: string;
+  summary: string;
+};
+
+export const marketplaceOffers: MarketplaceOffer[] = [
+  {
+    id: 'offer-survey-package',
+    type: 'Survey offer',
+    title: 'Pre-purchase survey slots this month',
+    description: 'Independent hull, machinery and sea-trial inspections for boats up to 50ft across the Solent.',
+    price_note: 'From £695',
+    href: '/services',
+    image_url: 'https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?auto=format&fit=crop&w=1000&q=82'
+  },
+  {
+    id: 'offer-electronics-refit',
+    type: 'Electronics bundle',
+    title: 'Navigation refit: MFD, AIS and NMEA 2000',
+    description: 'Package pricing for chartplotter upgrades, transducer fitting, AIS and clean helm wiring.',
+    price_note: 'Save up to 15%',
+    href: '/services',
+    image_url: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1000&q=82'
+  },
+  {
+    id: 'offer-berth-iow',
+    type: 'Berth availability',
+    title: '45ft annual berth availability — Isle of Wight',
+    description: 'Visitor, seasonal and annual berthing enquiries now open for selected south coast marinas.',
+    price_note: 'Check rates',
+    href: '/marinas',
+    image_url: 'https://images.unsplash.com/photo-1515238152791-8216bfdf89a7?auto=format&fit=crop&w=1000&q=82'
+  }
+];
+
+export const videoGuides: VideoGuide[] = [
+  {
+    id: 'video-survey',
+    title: 'What a marine survey should really cover',
+    category: 'Buyer guide',
+    duration: '8 min',
+    description: 'Hull, moisture, machinery, sea-cocks, rigging and the common red flags buyers miss.',
+    image_url: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1000&q=82'
+  },
+  {
+    id: 'video-flybridge',
+    title: 'Flybridge cruiser buying checklist',
+    category: 'Boat review',
+    duration: '11 min',
+    description: 'Engines, shafts, stern gear, canopy condition, flybridge leaks and accommodation checks.',
+    image_url: 'https://images.unsplash.com/photo-1605281317010-fe5ffe798166?auto=format&fit=crop&w=1000&q=82'
+  },
+  {
+    id: 'video-costs',
+    title: 'Real ownership costs for a 40ft motor boat',
+    category: 'Ownership',
+    duration: '14 min',
+    description: 'Fuel, berthing, servicing, insurance, lifting, anodes, electronics and unexpected costs.',
+    image_url: 'https://images.unsplash.com/photo-1528154291023-a6525fabe5b4?auto=format&fit=crop&w=1000&q=82'
+  }
+];
+
+export const boatReviews: BoatReview[] = [
+  {
+    id: 'review-princess-388',
+    title: 'Princess 388: classic British flybridge value',
+    type: 'Broker review',
+    summary: 'Why 1990s flybridge cruisers still attract serious family buyers.',
+    image_url: 'https://images.unsplash.com/photo-1605281317010-fe5ffe798166?auto=format&fit=crop&w=700&q=82'
+  },
+  {
+    id: 'review-moody-333',
+    title: 'Moody 333: compact centre-cockpit practicality',
+    type: 'Owner review',
+    summary: 'A proven sailing cruiser with separate aft-cabin appeal and manageable running costs.',
+    image_url: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=700&q=82'
+  },
+  {
+    id: 'review-ribeye',
+    title: 'Premium RIBs: what makes a used example worth more',
+    type: 'Market insight',
+    summary: 'Tube condition, electronics, trailer history and outboard hours explained.',
+    image_url: 'https://images.unsplash.com/photo-1534008897995-27a23e859048?auto=format&fit=crop&w=700&q=82'
+  }
+];
+
+export const marineGuides: MarineGuide[] = [
+  { id: 'guide-finance', category: 'Buying', title: 'How to check finance before buying a boat', summary: 'The practical checks that reduce risk when buying privately or through a broker.' },
+  { id: 'guide-transport', category: 'Logistics', title: 'Road transport vs skippered delivery', summary: 'When to lift and truck a boat, when to deliver by sea, and what each route can cost.' },
+  { id: 'guide-chandlery', category: 'Refit', title: 'The first 20 things to upgrade on an older cruiser', summary: 'Safety kit, batteries, chargers, bilge pumps, navigation and comfort upgrades ranked.' },
+  { id: 'guide-berthing', category: 'Marinas', title: 'Annual berth checklist for 35–45ft boats', summary: 'Depth, access, shore power, lift-out, liveaboard rules, parking and hidden fees.' }
+];
